@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace std;
+using namespace __gnu_pbds;
+#define ll long long
+#define int long long
+#define ln "\n"
+const int mod =1e9+7;
+using ordered_set = tree<int, null_type, less_equal<int>, rb_tree_tag, tree_order_statistics_node_update>;
+
+int32_t main() {
+    ios::sync_with_stdio(false);cin.tie(nullptr);
+
+    int t = 1;//cin>>t;
+    while (t--) {
+        int n,k;
+        cin>>n>>k;
+        vector <int> cost(n+1);
+        vector <int> dp(k+1,mod);
+        for(int i=1;i<=n;i++) {
+            cin>>cost[i];
+        }
+        dp[0]=0;
+       // dp[1]=abs(a[1]-a[0]);
+        for(int i=1;i<=k;i++) {
+            for(int j=1;j<=n;j++) {
+                if (i-cost[j]>=0)
+                    dp[i]=min(dp[i],dp[i-cost[j]]+1);
+
+            }
+        }
+        if (dp[k]==mod)cout<<-1<<ln;
+else            cout<<dp[k]<<ln;
+
+
+    }
+}
